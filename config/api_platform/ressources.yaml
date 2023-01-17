@@ -1,0 +1,25 @@
+App\Entity\Etudiant:
+    operations:
+        ApiPlatform\Metadata\Get: ~
+        ApiPlatform\Metadata\GetCollection: ~ 
+        ApiPlatform\Metadata\Delete: ~
+        ApiPlatform\Metadata\Put: ~
+        ApiPlatform\Metadata\Patch: ~
+        etudiant_add:
+            #path: /etudiants/add
+            #methods: ['POST']
+            # defaults:
+            #     _controller: App\Controller\EtudiantController::addEtudiant
+            #     _api_resource_class: App\Entity\Etudinat
+            #     # routeName: etudiant_add
+            #    class: ApiPlatform\Metadata\Post
+            # method: POST
+            # uriTemplate: /books/{id}/publication
+            # controller: App\Controller\CreateBookPublication
+            class: ApiPlatform\Metadata\Post
+            method: POST
+            uriTemplate: /api/etudiants/add
+            controller: App\Controller\EtudiantController
+            read: false
+            # routeName: etudiant_add
+            # read: false

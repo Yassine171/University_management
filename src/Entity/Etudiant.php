@@ -8,8 +8,12 @@ use ApiPlatform\Metadata\ApiFilter;
 use App\Repository\EtudiantRepository;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Patch;
 
-#[ApiResource]
 #[ApiResource,
     ApiFilter(
     SearchFilter::class,
@@ -24,7 +28,7 @@ use ApiPlatform\Metadata\ApiResource;
         properties: [
             'name'
         ]
-    )
+        )
     ]
 #[ORM\Entity(repositoryClass: EtudiantRepository::class)]
 class Etudiant 

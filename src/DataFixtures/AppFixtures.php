@@ -120,8 +120,8 @@ class AppFixtures extends Fixture
 
       $etudiant->setUserId($user);
 
-        $prof->addEtudiantsEncadre($etudiant);
-         $entreprise->addStagiaire($etudiant);
+        $prof1->addEtudiantsEncadre($etudiant);
+         $entreprise1->addStagiaire($etudiant);
         $manager->persist($etudiant);
        
       }
