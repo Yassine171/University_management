@@ -2,8 +2,8 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Doctrine\Odm\Filter\OrderFilter;
-use ApiPlatform\Doctrine\Odm\Filter\SearchFilter;
+use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use App\Repository\EtudiantRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -27,7 +27,7 @@ use ApiPlatform\Metadata\ApiResource;
     )
     ]
 #[ORM\Entity(repositoryClass: EtudiantRepository::class)]
-class Etudiant
+class Etudiant 
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -54,10 +54,15 @@ class Etudiant
     #[ORM\JoinColumn(nullable: false)]
     private ?Filiere $filiere;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
     }
+
 
     public function getName(): ?string
     {
@@ -128,6 +133,18 @@ class Etudiant
     public function setFiliere(?Filiere $filiere): self
     {
         $this->filiere = $filiere;
+
+        return $this;
+    }
+
+    public function getUserId(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUserId(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
+use App\Entity\User;
 
 #[ApiResource]
 #[ORM\Entity(repositoryClass: ProfRepository::class)]
@@ -26,6 +27,10 @@ class Prof
 
     #[ORM\OneToMany(mappedBy: 'encadrant', targetEntity: Etudiant::class)]
     private Collection $etudiants_encadre;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     public function __construct()
     {
@@ -87,6 +92,18 @@ class Prof
                 $etudiantsEncadre->setEncadrant(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUserId(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUserId(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

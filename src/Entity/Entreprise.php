@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
+use App\Entity\User;
 
 #[ApiResource]
 #[ORM\Entity(repositoryClass: EntrepriseRepository::class)]
@@ -22,6 +23,10 @@ class Entreprise
 
     #[ORM\OneToMany(mappedBy: 'entreprise', targetEntity: Etudiant::class)]
     private Collection $Stagiaires;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     public function __construct()
     {
@@ -71,6 +76,18 @@ class Entreprise
                 $stagiaire->setEntreprise(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUserId(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUserId(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
